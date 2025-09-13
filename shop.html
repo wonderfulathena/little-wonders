@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Wonders - Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #4a4a4a;
+            background: linear-gradient(135deg, #fef7f7 0%, #f8e8f0 30%, #fff8e0 70%, #f0e6f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-lw {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #9bb5ce;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: #d4af37;
+            font-family: 'Segoe UI', sans-serif;
+            font-style: italic;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #9bb5ce;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .shop-header {
+            text-align: center;
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+
+        .shop-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #8b6b6b;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .shop-header p {
+            font-size: 1.2rem;
+            color: #9a8a8a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .filter-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #9bb5ce;
+        }
+
+        .filter-option label {
+            font-size: 0.9rem;
+            color: #555;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: #9bb5ce;
+            box-shadow: 0 0 0 2px rgba(155, 181, 206, 0.1);
+        }
+
+        .search-box input::placeholder {
+            color: #999;
+        }
+
+        .products-section {
+            flex: 1;
+        }
+
+        .products-header {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .results-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sort-controls label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .sort-controls select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            background: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1e1e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 2.5rem;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #d4a5a5;
+            margin-bottom: 0.75rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.6rem;
+            background: #9bb5ce;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #8aa5c7;
+        }
+
+        /* Product Detail Modal Styles */
+        .product-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .product-detail-modal {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-detail {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8b6b6b;
+        }
+
+        .detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f8e8f0 0%, #e8f0f8 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .detail-info h2 {
+            color: #8b6b6b;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .detail-price {
+            font-size: 1.5rem;
+            color: #9bb5ce;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .color-options {
+            margin: 1rem 0;
+        }
+
+        .color-options h3 {
+            color: #8b6b6b;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .color-option {
+            padding: 0.5rem;
+            border: 2px solid #d4a5a5;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .color-option:hover,
+        .color-option.selected {
+            background: #d4a5a5;
+            color: white;
+        }
+
+        .detail-description {
+            color: #9a8a8a;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-detail {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-cart {
+            background: #d4a5a5;
+            color: white;
+        }
+
+        .btn-add-cart:hover {
+            background: #c49595;
+        }
+
+        .btn-buy-now {
+            background: #9bb5ce;
+            color: white;
+        }
+
+        .btn-buy-now:hover {
+            background: #8ba5c6;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .page-btn {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #9bb5ce;
+            background: transparent;
+            color: #9bb5ce;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: #9bb5ce;
+            color: white;
+        }
+
+        footer {
+            background: linear-gradient(135deg, rgba(139, 107, 107, 0.9) 0%, rgba(155, 181, 206, 0.9) 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .main-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 0.75rem;
+            }
+            
+            .shop-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            
+            .filter-options {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .detail-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-circle">
+                    <div class="logo-lw">LW</div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-title">Little Wonders</div>
+                    <div class="logo-tagline">made WITH an EYE for STYLE</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="cart.html">Cart (0)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="shop-header">
+            <h1>Shop Little Wonders</h1>
+            <p>Discover our carefully curated collection of products that bring joy and wonder to your everyday life</p>
+        </section>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="search-section">
+                    <div class="search-box">
+                        <input type="text" placeholder="Try: 'candles', 'gifts', 'relaxing', 'beautiful'..." id="searchInput">
+                    </div>
+                    <div class="search-tips">
+                        <small style="color: #666; font-size: 0.8rem; margin-top: 0.5rem; display: block;">
+                            💡 Search by product type, mood, or description
+                        </small>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-section">
+                        <h3>Categories</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-all" value="" checked>
+                                <label for="cat-all">All Categories</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-candles" value="candles">
+                                <label for="cat-candles">Candles</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-magnets" value="magnets">
+                                <label for="cat-magnets">Magnets</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-bracelets" value="bracelets">
+                                <label for="cat-bracelets">Bracelets</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-scrunchies" value="scrunchies">
+                                <label for="cat-scrunchies">Scrunchies</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="products-section">
+                <div class="products-header">
+                    <div class="results-count">
+                        <span id="resultsCount">6</span> results
+                    </div>
+                    <div class="sort-controls">
+                        <label for="sortBy">Sort by:</label>
+                        <select id="sortBy">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                </div>
+
+        <section class="products-grid">
+            <div class="product-card" data-category="candles">
+                <div class="product-image">🕯️</div>
+                <div class="product-info">
+                    <h3 class="product-title">Lavender Aromatherapy Candle</h3>
+                    <p class="product-description">Hand-poured soy candle with calming lavender scent</p>
+                    <div class="product-price">$18.99</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="candles">
+                <div class="product-image">🕯️</div>
+                <div class="product-info">
+                    <h3 class="product-title">Vanilla Bean Candle</h3>
+                    <p class="product-description">Warm vanilla scent in a beautiful glass jar</p>
+                    <div class="product-price">$16.99</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="magnets">
+                <div class="product-image">🧲</div>
+                <div class="product-info">
+                    <h3 class="product-title">Floral Fridge Magnet</h3>
+                    <p class="product-description">Handcrafted ceramic magnet with delicate flower design</p>
+                    <div class="product-price">$8.99</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="magnets">
+                <div class="product-image">🧲</div>
+                <div class="product-info">
+                    <h3 class="product-title">Inspirational Quote Magnet</h3>
+                    <p class="product-description">Beautiful magnet with uplifting message</p>
+                    <div class="product-price">$6.99</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="bracelets">
+                <div class="product-image">💎</div>
+                <div class="product-info">
+                    <h3 class="product-title">Mixed Bead Bracelet</h3>
+                    <p class="product-description">Assorted mixed glass beads with gold spacers in between the glass beads</p>
+                    <div class="product-price">$12.00</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="scrunchies">
+                <div class="product-image">🎀</div>
+                <div class="product-info">
+                    <h3 class="product-title">Silk Scrunchie Set</h3>
+                    <p class="product-description">Set of 3 silk scrunchies in pastel colors</p>
+                    <div class="product-price">$12.99</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">Next →</button>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <!-- Product Detail Modal -->
+    <div class="product-detail-overlay" id="productDetailOverlay">
+        <div class="product-detail-modal">
+            <button class="close-detail" onclick="closeProductDetail()">&times;</button>
+            <div class="detail-content">
+                <div class="detail-image" id="detailImage">💎</div>
+                <div class="detail-info">
+                    <h2 id="detailTitle">Mixed Bead Bracelet</h2>
+                    <div class="detail-price" id="detailPrice">$12.00</div>
+                    
+                    <div class="color-options">
+                        <h3>Choose Color:</h3>
+                        <div class="color-grid">
+                            <div class="color-option" data-color="clear" onclick="selectColor(this)">Clear</div>
+                            <div class="color-option" data-color="green-blue" onclick="selectColor(this)">Green Blue Mix</div>
+                            <div class="color-option" data-color="red" onclick="selectColor(this)">Red</div>
+                            <div class="color-option" data-color="yellow" onclick="selectColor(this)">Yellow</div>
+                            <div class="color-option" data-color="white" onclick="selectColor(this)">White</div>
+                            <div class="color-option selected" data-color="mixed" onclick="selectColor(this)">Mixed Colors</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-description" id="detailDescription">
+                        Beautiful assorted mixed glass beads with elegant gold spacers in between the glass beads. Each bracelet is handcrafted with care and attention to detail, making it a perfect accessory for any occasion.
+                    </div>
+                    
+                    <div class="detail-actions">
+                        <button class="btn-detail btn-add-cart" onclick="addToCartFromDetail()">Add to Cart</button>
+                        <button class="btn-detail btn-buy-now" onclick="buyNow()">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Little Wonders. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            filterProducts();
+        });
+
+        // Search on Enter key press
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                // Trigger enhanced search
+                filterProducts();
+                
+                // Add visual feedback
+                this.style.borderColor = '#9bb5ce';
+                this.style.boxShadow = '0 0 0 2px rgba(155, 181, 206, 0.2)';
+                
+                // Reset border after search
+                setTimeout(() => {
+                    this.style.borderColor = '#ddd';
+                    this.style.boxShadow = 'none';
+                }, 500);
+            }
+        });
+
+        // Category filter functionality
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function(e) {
+                if (this.id === 'cat-all') {
+                    // If "All Categories" is checked, uncheck others
+                    if (this.checked) {
+                        document.querySelectorAll('input[type="checkbox"]:not(#cat-all)').forEach(cb => {
+                            cb.checked = false;
+                        });
+                    }
+                } else {
+                    // If a specific category is checked, uncheck "All Categories"
+                    if (this.checked) {
+                        document.getElementById('cat-all').checked = false;
+                    }
+                }
+                filterProducts();
+            });
+        });
+
+        // Sort functionality
+        document.getElementById('sortBy').addEventListener('change', function(e) {
+            sortProducts();
+        });
+
+        // Combined filter function
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked:not(#cat-all)'))
+                .map(cb => cb.value);
+            const showAllCategories = document.getElementById('cat-all').checked;
+            const products = Array.from(document.querySelectorAll('.product-card'));
+            
+            let visibleCount = 0;
+            
+            // Enhanced search with scoring system
+            products.forEach(product => {
+                const title = product.querySelector('.product-title').textContent.toLowerCase();
+                const description = product.querySelector('.product-description').textContent.toLowerCase();
+                const category = product.getAttribute('data-category');
+                
+                let showProduct = true;
+                let searchScore = 0;
+                
+                // Enhanced search filter with intelligent matching
+                if (searchTerm) {
+                    // Exact matches get highest score
+                    if (title.includes(searchTerm)) searchScore += 10;
+                    if (description.includes(searchTerm)) searchScore += 8;
+                    
+                    // Partial word matches
+                    const searchWords = searchTerm.split(' ').filter(word => word.length > 2);
+                    searchWords.forEach(word => {
+                        if (title.includes(word)) searchScore += 5;
+                        if (description.includes(word)) searchScore += 3;
+                    });
+                    
+                    // Category relevance
+                    if (category.includes(searchTerm) || searchTerm.includes(category)) {
+                        searchScore += 6;
+                    }
+                    
+                    // Common synonyms and related terms
+                    const synonyms = {
+                        'candle': ['candles', 'aromatherapy', 'scent', 'fragrance', 'soy', 'wax'],
+                        'magnet': ['magnets', 'fridge', 'decorative', 'ceramic', 'inspirational'],
+                        'bracelet': ['bracelets', 'jewelry', 'charm', 'sterling', 'silver'],
+                        'scrunchy': ['scrunchies', 'hair', 'accessory', 'silk', 'pastel'],
+                        'gift': ['gifts', 'present', 'occasion', 'celebration'],
+                        'home': ['home', 'living', 'decor', 'decoration', 'interior'],
+                        'relax': ['relaxation', 'calming', 'peaceful', 'tranquil', 'soothing'],
+                        'beautiful': ['beautiful', 'pretty', 'elegant', 'charming', 'lovely']
+                    };
+                    
+                    // Check synonyms
+                    Object.keys(synonyms).forEach(key => {
+                        if (searchTerm.includes(key) || synonyms[key].some(syn => searchTerm.includes(syn))) {
+                            if (title.includes(key) || description.includes(key)) {
+                                searchScore += 4;
+                            }
+                        }
+                    });
+                    
+                    // Show product only if it has a search score
+                    if (searchScore === 0) {
+                        showProduct = false;
+                    }
+                }
+                
+                // Category filter
+                if (!showAllCategories && selectedCategories.length > 0) {
+                    if (!selectedCategories.includes(category)) {
+                        showProduct = false;
+                    }
+                }
+                
+                if (showProduct) {
+                    product.style.display = 'block';
+                    visibleCount++;
+                    
+                    // Add search score for sorting (if searching)
+                    if (searchTerm) {
+                        product.setAttribute('data-search-score', searchScore);
+                    }
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+            
+            // Sort by search relevance if searching
+            if (searchTerm) {
+                sortBySearchRelevance();
+            }
+            
+            // Update results count
+            document.getElementById('resultsCount').textContent = visibleCount;
+        }
+
+        // Sort products by search relevance
+        function sortBySearchRelevance() {
+            const productsGrid = document.querySelector('.products-grid');
+            const visibleProducts = Array.from(document.querySelectorAll('.product-card[style*="block"]'));
+            
+            visibleProducts.sort((a, b) => {
+                const scoreA = parseInt(a.getAttribute('data-search-score') || 0);
+                const scoreB = parseInt(b.getAttribute('data-search-score') || 0);
+                return scoreB - scoreA; // Highest score first
+            });
+            
+            // Reorder products in the grid
+            visibleProducts.forEach(product => {
+                productsGrid.appendChild(product);
+            });
+        }
+
+        // Sort products function
+        function sortProducts() {
+            const sortBy = document.getElementById('sortBy').value;
+            const productsGrid = document.querySelector('.products-grid');
+            const products = Array.from(document.querySelectorAll('.product-card'));
+            
+            products.sort((a, b) => {
+                const priceA = parseFloat(a.querySelector('.product-price').textContent.replace('$', ''));
+                const priceB = parseFloat(b.querySelector('.product-price').textContent.replace('$', ''));
+                
+                switch (sortBy) {
+                    case 'price-low':
+                        return priceA - priceB;
+                    case 'price-high':
+                        return priceB - priceA;
+                    case 'newest':
+                        return 0; // For now, keep original order
+                    default:
+                        return 0;
+                }
+            });
+            
+            // Reorder products in the grid
+            products.forEach(product => {
+                productsGrid.appendChild(product);
+            });
+        }
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productTitle = this.parentElement.querySelector('.product-title').textContent;
+                alert(`Added "${productTitle}" to your cart!`);
+                updateCartCount();
+            });
+        });
+
+        // Update cart count in navigation
+        function updateCartCount() {
+            // This would normally get the count from localStorage or a global cart state
+            // For now, we'll increment a simple counter
+            let cartCount = parseInt(localStorage.getItem('cartCount') || '0');
+            cartCount++;
+            localStorage.setItem('cartCount', cartCount.toString());
+            
+            const cartLink = document.querySelector('.nav-links a[href="cart.html"]');
+            if (cartLink) {
+                cartLink.textContent = `Cart (${cartCount})`;
+            }
+        }
+
+        // Product detail functionality
+        function showProductDetail(productCard) {
+            const title = productCard.querySelector('.product-title').textContent;
+            const price = productCard.querySelector('.product-price').textContent;
+            const description = productCard.querySelector('.product-description').textContent;
+            const image = productCard.querySelector('.product-image').textContent;
+            
+            document.getElementById('detailTitle').textContent = title;
+            document.getElementById('detailPrice').textContent = price;
+            document.getElementById('detailDescription').textContent = description;
+            document.getElementById('detailImage').textContent = image;
+            
+            // Show color options only for bracelets
+            const colorOptions = document.querySelector('.color-options');
+            if (title.toLowerCase().includes('bracelet')) {
+                colorOptions.style.display = 'block';
+            } else {
+                colorOptions.style.display = 'none';
+            }
+            
+            document.getElementById('productDetailOverlay').style.display = 'flex';
+        }
+
+        function closeProductDetail() {
+            document.getElementById('productDetailOverlay').style.display = 'none';
+        }
+
+        function selectColor(colorOption) {
+            // Remove selected class from all options
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            colorOption.classList.add('selected');
+        }
+
+        function addToCartFromDetail() {
+            const title = document.getElementById('detailTitle').textContent;
+            const selectedColor = document.querySelector('.color-option.selected');
+            const colorText = selectedColor ? ` (${selectedColor.textContent})` : '';
+            alert(`Added ${title}${colorText} to cart!`);
+            closeProductDetail();
+        }
+
+        function buyNow() {
+            const title = document.getElementById('detailTitle').textContent;
+            const price = document.getElementById('detailPrice').textContent;
+            const selectedColor = document.querySelector('.color-option.selected');
+            const colorText = selectedColor ? ` (${selectedColor.textContent})` : '';
+            alert(`Buy Now: ${title}${colorText} - ${price}`);
+            closeProductDetail();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('productDetailOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProductDetail();
+            }
+        });
+
+        // Make product cards clickable
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking the add to cart button
+                if (!e.target.classList.contains('add-to-cart')) {
+                    showProductDetail(this);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Wonders - Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #4a4a4a;
+            background: linear-gradient(135deg, #fef7f7 0%, #f8e8f0 30%, #e8f0f8 70%, #f0e6f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-lw {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #9bb5ce;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: #d4af37;
+            font-family: 'Segoe UI', sans-serif;
+            font-style: italic;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #9bb5ce;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: #d4a5a5;
+            color: white;
+        }
+
+        /* Checkout Header */
+        .checkout-header {
+            text-align: center;
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+
+        .checkout-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #8b6b6b;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .checkout-header p {
+            font-size: 1.2rem;
+            color: #9a8a8a;
+        }
+
+        /* Checkout Content */
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Checkout Form */
+        .checkout-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(155, 181, 206, 0.15);
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #8b6b6b;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #9bb5ce;
+            box-shadow: 0 0 0 3px rgba(155, 181, 206, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #9bb5ce;
+        }
+
+        .payment-method.selected {
+            border-color: #d4a5a5;
+            background: rgba(212, 165, 165, 0.1);
+        }
+
+        .payment-method input[type="radio"] {
+            display: none;
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-method label {
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(155, 181, 206, 0.15);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .order-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #8b6b6b;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .order-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f8e8f0 0%, #e8f0f8 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .order-item-details h4 {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-item-details p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .order-item-price {
+            margin-left: auto;
+            font-weight: bold;
+            color: #d4a5a5;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid #d4a5a5;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #8b6b6b;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #d4a5a5;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .checkout-btn:hover {
+            background: #c49595;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 165, 165, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .security-badge .icon {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(139, 107, 107, 0.9) 0%, rgba(155, 181, 206, 0.9) 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .checkout-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .checkout-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .order-summary {
+                position: static;
+            }
+            
+            .security-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-circle">
+                    <div class="logo-lw">LW</div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-title">Little Wonders</div>
+                    <div class="logo-tagline">made WITH an EYE for STYLE</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="cart.html">Cart (0)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="checkout-header">
+            <h1>Checkout</h1>
+            <p>Complete your order and we'll get it ready for you</p>
+        </section>
+
+        <div class="checkout-content">
+            <div class="checkout-form">
+                <form id="checkoutForm">
+                    <!-- Shipping Information -->
+                    <div class="form-section">
+                        <h2>Shipping Information</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="address">Street Address *</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State *</label>
+                                <select id="state" name="state" required>
+                                    <option value="">Select State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zipCode">ZIP Code *</label>
+                                <input type="text" id="zipCode" name="zipCode" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="saveAddress" name="saveAddress">
+                            <label for="saveAddress">Save this address for future orders</label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Information -->
+                    <div class="form-section">
+                        <h2>Payment Information</h2>
+                        <div class="payment-methods">
+                            <div class="payment-method selected">
+                                <input type="radio" id="card" name="paymentMethod" value="card" checked>
+                                <label for="card">
+                                    <div class="payment-icon">💳</div>
+                                    Credit Card
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="paypal" name="paymentMethod" value="paypal">
+                                <label for="paypal">
+                                    <div class="payment-icon">🅿️</div>
+                                    PayPal
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="apple" name="paymentMethod" value="apple">
+                                <label for="apple">
+                                    <div class="payment-icon">🍎</div>
+                                    Apple Pay
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="google" name="paymentMethod" value="google">
+                                <label for="google">
+                                    <div class="payment-icon">G</div>
+                                    Google Pay
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="cardDetails">
+                            <div class="form-group full-width">
+                                <label for="cardNumber">Card Number *</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiryDate">Expiry Date *</label>
+                                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV *</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                                </div>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="cardName">Name on Card *</label>
+                                <input type="text" id="cardName" name="cardName" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Notes -->
+                    <div class="form-section">
+                        <h2>Order Notes (Optional)</h2>
+                        <div class="form-group full-width">
+                            <label for="orderNotes">Special instructions for your order</label>
+                            <textarea id="orderNotes" name="orderNotes" rows="3" placeholder="Any special requests or delivery instructions..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                
+                <div class="order-items">
+                    <div class="order-item">
+                        <div class="order-item-image">💎</div>
+                        <div class="order-item-details">
+                            <h4>Mixed Bead Bracelet</h4>
+                            <p>Color: Mixed Colors</p>
+                        </div>
+                        <div class="order-item-price">$12.00</div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="order-item-image">🕯️</div>
+                        <div class="order-item-details">
+                            <h4>Lavender Aromatherapy Candle</h4>
+                            <p>Qty: 2</p>
+                        </div>
+                        <div class="order-item-price">$37.98</div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="order-item-image">🧲</div>
+                        <div class="order-item-details">
+                            <h4>Floral Fridge Magnet</h4>
+                            <p>Qty: 1</p>
+                        </div>
+                        <div class="order-item-price">$8.99</div>
+                    </div>
+                </div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>$58.97</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span>$4.72</span>
+                </div>
+                
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>$63.69</span>
+                </div>
+
+                <button class="checkout-btn" onclick="processOrder()">
+                    Complete Order
+                </button>
+
+                <div class="security-badges">
+                    <div class="security-badge">
+                        <span class="icon">🔒</span>
+                        <span>Secure Checkout</span>
+                    </div>
+                    <div class="security-badge">
+                        <span class="icon">🛡️</span>
+                        <span>SSL Protected</span>
+                    </div>
+                    <div class="security-badge">
+                        <span class="icon">💳</span>
+                        <span>PCI Compliant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Little Wonders. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load cart count from localStorage
+        function loadCartCount() {
+            const cartCount = localStorage.getItem('cartCount') || '0';
+            const cartLink = document.querySelector('.nav-links a[href="cart.html"]');
+            if (cartLink) {
+                cartLink.textContent = `Cart (${cartCount})`;
+            }
+        }
+
+        // Payment method selection
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Remove selected class from all payment methods
+                document.querySelectorAll('.payment-method').forEach(method => {
+                    method.classList.remove('selected');
+                });
+                
+                // Add selected class to current method
+                this.closest('.payment-method').classList.add('selected');
+                
+                // Show/hide card details
+                const cardDetails = document.getElementById('cardDetails');
+                if (this.value === 'card') {
+                    cardDetails.style.display = 'block';
+                } else {
+                    cardDetails.style.display = 'none';
+                }
+            });
+        });
+
+        // Form validation
+        function validateForm() {
+            const requiredFields = document.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#ff6b6b';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e1e1e1';
+                }
+            });
+            
+            // Email validation
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value && !emailRegex.test(email.value)) {
+                email.style.borderColor = '#ff6b6b';
+                isValid = false;
+            }
+            
+            // Phone validation
+            const phone = document.getElementById('phone');
+            const phoneRegex = /^[\d\s\-\(\)]+$/;
+            if (phone.value && !phoneRegex.test(phone.value)) {
+                phone.style.borderColor = '#ff6b6b';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        // Process order
+        async function processOrder() {
+            if (!validateForm()) {
+                alert('Please fill in all required fields correctly.');
+                return;
+            }
+            
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            checkoutBtn.disabled = true;
+            checkoutBtn.textContent = 'Processing...';
+            
+            try {
+                // Collect form data
+                const formData = new FormData(document.getElementById('checkoutForm'));
+                const orderData = {
+                    customer: {
+                        firstName: formData.get('firstName'),
+                        lastName: formData.get('lastName'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        address: formData.get('address'),
+                        city: formData.get('city'),
+                        state: formData.get('state'),
+                        zipCode: formData.get('zipCode')
+                    },
+                    items: getCartItems(),
+                    totals: getOrderTotals(),
+                    payment_method: formData.get('paymentMethod'),
+                    order_notes: formData.get('orderNotes') || ''
+                };
+                
+                // Send order to backend
+                const response = await fetch('/api/process-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(`🎉 Order placed successfully!\n\nOrder #${result.order_id}\n\nThank you for choosing Little Wonders!\n\nYou will receive a confirmation email shortly.`);
+                    
+                    // Clear cart
+                    localStorage.setItem('cartCount', '0');
+                    loadCartCount();
+                    
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                } else {
+                    throw new Error(result.error || 'Failed to process order');
+                }
+                
+            } catch (error) {
+                console.error('Order processing error:', error);
+                alert(`❌ Error processing order: ${error.message}\n\nPlease try again or contact support.`);
+            } finally {
+                checkoutBtn.disabled = false;
+                checkoutBtn.textContent = 'Complete Order';
+            }
+        }
+        
+        // Get cart items from the order summary
+        function getCartItems() {
+            const items = [];
+            const orderItems = document.querySelectorAll('.order-item');
+            
+            orderItems.forEach(item => {
+                const name = item.querySelector('.order-item-details h4').textContent;
+                const details = item.querySelector('.order-item-details p').textContent;
+                const price = parseFloat(item.querySelector('.order-item-price').textContent.replace('$', ''));
+                const image = item.querySelector('.order-item-image').textContent;
+                
+                // Extract quantity from details if present
+                let quantity = 1;
+                const qtyMatch = details.match(/Qty: (\d+)/);
+                if (qtyMatch) {
+                    quantity = parseInt(qtyMatch[1]);
+                }
+                
+                // Extract color from details if present
+                let color = '';
+                const colorMatch = details.match(/Color: (.+)/);
+                if (colorMatch) {
+                    color = colorMatch[1];
+                }
+                
+                items.push({
+                    name: name,
+                    description: color ? `${name} - ${color}` : name,
+                    color: color,
+                    quantity: quantity,
+                    price: price / quantity, // Price per unit
+                    icon: image
+                });
+            });
+            
+            return items;
+        }
+        
+        // Get order totals
+        function getOrderTotals() {
+            const subtotal = parseFloat(document.querySelector('.summary-row:nth-child(1) span:last-child').textContent.replace('$', ''));
+            const shipping = document.querySelector('.summary-row:nth-child(2) span:last-child').textContent;
+            const tax = parseFloat(document.querySelector('.summary-row:nth-child(3) span:last-child').textContent.replace('$', ''));
+            const total = parseFloat(document.querySelector('.summary-row.total span:last-child').textContent.replace('$', ''));
+            
+            return {
+                subtotal: subtotal,
+                shipping: shipping,
+                tax: tax,
+                total: total
+            };
+        }
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV formatting
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCartCount();
+        });
+    </script>
+</body>
+</html>
+
